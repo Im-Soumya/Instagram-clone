@@ -7,7 +7,7 @@ const Post = ({ post }) => {
     <div className='post'>
       <div className="post_header">
         <Avatar size="md" name='Dan Abrahmov' src='https://bit.ly/dan-abramov' />
-        <h3>{post.username}</h3>
+        <h3><strong>{post.username}</strong></h3>
       </div>
       <img
         className='post_image'
