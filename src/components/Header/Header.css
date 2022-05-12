@@ -3,6 +3,8 @@
   top: 0;
   z-index: 1;
   width: 100%;
+  height: 60px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -12,8 +14,14 @@
   object-fit: contain;
 }
 
-.header_buttons {
+.header_logout_buttons {
   width: 180px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header_signin_buttons {
+  width: 205px;
   display: flex;
   justify-content: space-between;
 }

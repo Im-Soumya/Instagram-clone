@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Avatar } from '@chakra-ui/react';
 import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore';
 import { db } from "../../firebase";
-import { Input, Button } from "@chakra-ui/react";
+import { Input, Button, Text } from "@chakra-ui/react";
 import './Post.css';
 
 const Post = ({ user, post, postId }) => {
@@ -40,19 +40,25 @@ const Post = ({ user, post, postId }) => {
     <div className='post'>
       <div className="post_header">
         <Avatar size="md" name={post.username} src="" />
-        <h3><strong>{post.username}</strong></h3>
+        <Text fontSize="lg" marginLeft="10px" fontWeight="bold" >{post.username}</Text>
       </div>
       <img
         className='post_image'
         src={post.imageURL}
       />
-      <h4 className='post_text'><strong>{post.username}: </strong>{post.caption}</h4>
+      <Text display="flex" marginTop="10px" marginBottom="20px" marginLeft="10px">
+        <Text
+          marginRight="10px"
+          fontWeight="bold"
+        >
+          {post.username}: </Text><Text noOfLines={3}>{post.caption}</Text>
+      </Text>
 
       <div className="post_comments">
         {comments?.map((comment, index) => (
-          <p key={index}>
-            <strong>{comment.username}: </strong>{comment.text}
-          </p>
+          <Text display="flex" key={index}>
+            <Text fontWeight="bold" marginRight="10px">{comment.username}: </Text>{comment.text}
+          </Text>
         ))}
       </div>
 

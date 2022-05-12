@@ -1,13 +1,16 @@
-import React from 'react';
+import { useState } from 'react';
 import "./Header.css";
 import { auth, provider } from "../../firebase";
 import { signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react';
 import { BsFacebook } from "react-icons/bs";
 import ImageUpload from '../ImageUpload/ImageUpload';
+import Signup from '../Signup/Signup';
 
 const Header = ({ user }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const { isOpen: isSignupOpen, onOpen: onSignupOpen, onClose: onSignupClose } = useDisclosure();
+  const { isOpen: isUploadOpen, onOpen: onUploadOpen, onClose: onUploadClose } = useDisclosure();
 
   const loginInWithGoogle = async () => {
     try {
@@ -38,38 +41,66 @@ const Header = ({ user }) => {
           alt=''
         />
 
-        {user === null ? (
-          <Button
-            _hover={{ opacity: 0.9 }}
-            colorScheme="facebook"
-            rightIcon={<BsFacebook />}
-            onClick={loginInWithGoogle}
-          >
-            Sign in
-          </Button>
-        ) : (
-          <div className='header_buttons'>
-            <Button
-              colorScheme="teal"
-              variant="outline"
-              onClick={onOpen}
-            >
-              Upload
-            </Button>
-            <Button
-              colorScheme="facebook"
-              _hover={{ opacity: 0.9 }}
-              onClick={logOut}
-            >
-              Logout
-            </Button>
-          </div>
-        )}
+        {user === null ?
+          (
+            <div className='header_signin_buttons'>
+              <Button
+                _hover={{ opacity: 0.9 }}
+                colorScheme="facebook"
+                rightIcon={<BsFacebook />}
+                onClick={loginInWithGoogle}
+              >
+                Sign in
+              </Button>
+              <Button
+                variant="outline"
+                colorScheme="teal"
+                onClick={onSignupOpen}
+              >
+                Sign up
+              </Button>
+            </div>
+          ) :
+          (
+            <div className='header_logout_buttons'>
+              <Button
+                colorScheme="teal"
+                variant="outline"
+                onClick={onUploadOpen}
+              >
+                Upload
+              </Button>
+              <Button
+                colorScheme="facebook"
+                _hover={{ opacity: 0.9 }}
+                onClick={logOut}
+              >
+                Logout
+              </Button>
+            </div>
+          )}
 
         <Modal
           isCentered
-          onClose={onClose}
-          isOpen={isOpen}
+          onClose={onSignupClose}
+          isOpen={isSignupOpen}
+          motionPreset="slideInBottom"
+          size="xl"
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Sign Up</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Signup onSignupClose={onSignupClose} />
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+
+        <Modal
+          isCentered
+          onClose={onUploadClose}
+          isOpen={isUploadOpen}
           size="xl"
           motionPreset="slideInBottom"
         >

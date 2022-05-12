@@ -5,11 +5,14 @@ import Header from './components/Header/Header';
 import { auth, db, provider } from "./firebase";
 import { onAuthStateChanged, signInWithPopup, updateProfile } from "firebase/auth";
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
-import { Text, Button } from '@chakra-ui/react';
+import { Text, Button, Spinner } from '@chakra-ui/react';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [user, setUser] = useState(null);
+  const [isAppLoading, setIsAppLoading] = useState(true);
+  const [isPostLoading, setIsPostLoading] = useState(true);
 
   const loginInWithGoogle = async () => {
     try {
@@ -27,8 +30,10 @@ function App() {
       if (currentUser) {
         console.log(currentUser.displayName);
         setUser(currentUser);
+        setIsAppLoading(false);
       } else {
         setUser(null);
+        setIsAppLoading(false);
       }
     })
 
@@ -47,22 +52,45 @@ function App() {
           post: doc.data(),
         }
       )));
+      setIsPostLoading(false);
     })
   }, [])
 
 
   return (
-    <div className="app">
-      <Header user={user} />
+    <>
+      {isAppLoading ?
+        (
+          <div className='app_spinner'>
+            <Spinner size="xl" />
+          </div>
+        ) :
+        (
+          <div className="app">
+            <Header user={user} />
 
-      {posts.map(({ id, post }) => (
-        <Post key={id} postId={id} post={post} user={user} />
-      ))}
+            <>
+              {isPostLoading &&
+                (
+                  <div className='post_spinner'>
+                    <Spinner size='md' />
+                  </div>
+                )}
+            </>
 
-      {user === null &&
-        <Text marginBottom="20px" fontSize="xl" fontWeight="bold">Sorry, <Button variant="link" size="xl" onClick={loginInWithGoogle}>Login</Button> to post something.</Text>
+            {posts.map(({ id, post }) => (
+              <Post key={id} postId={id} post={post} user={user} />
+            ))}
+
+            {user === null &&
+              <Text marginBottom="20px" fontSize="xl" fontWeight="bold">Sorry, <Button variant="link" size="xl" onClick={loginInWithGoogle}>Login</Button> to post something.</Text>
+            }
+
+            <Footer />
+          </div>
+        )
       }
-    </div>
+    </>
   );
 }
 
