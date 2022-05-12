@@ -2,6 +2,7 @@
   background-color: white;
   max-width: 700px;
   border: 1px solid lightgrey;
+  border-radius: 10px;
   margin-bottom: 45px;
 }
 
@@ -29,4 +30,20 @@
 
 .post_avatar {
   margin-right: 10px;
+}
+
+.post_comment_box {
+  display: flex;
+  margin: 10px;
+}
+
+.comment_input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.post_comments {
+  margin: 0 10px;
+  margin-bottom: 8px;
+  /* padding: 20px; */
 }
