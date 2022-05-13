@@ -7,6 +7,7 @@ import { onAuthStateChanged, signInWithPopup, updateProfile } from "firebase/aut
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { Text, Button, Spinner } from '@chakra-ui/react';
 import Footer from './components/Footer/Footer';
+import { BsFacebook } from "react-icons/bs";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -83,7 +84,7 @@ function App() {
             ))}
 
             {user === null &&
-              <Text marginBottom="20px" fontSize="xl" fontWeight="bold">Sorry, <Button variant="link" size="xl" onClick={loginInWithGoogle}>Login</Button> to post something.</Text>
+              <Text marginBottom="20px" fontSize="xl" fontWeight="bold">Sorry, <Button variant="link" size="xl" onClick={loginInWithGoogle}>Login<BsFacebook style={{ marginLeft: "5px" }} /></Button> to post something.</Text>
             }
 
             <Footer />

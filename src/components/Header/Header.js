@@ -1,27 +1,16 @@
-import { useState } from 'react';
 import "./Header.css";
-import { auth, provider } from "../../firebase";
-import { signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { auth } from "../../firebase";
+import { signOut } from "firebase/auth";
 import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react';
-import { BsFacebook } from "react-icons/bs";
 import ImageUpload from '../ImageUpload/ImageUpload';
 import Signup from '../Signup/Signup';
+import Signin from '../Signin.js/Signin';
 
 const Header = ({ user }) => {
 
   const { isOpen: isSignupOpen, onOpen: onSignupOpen, onClose: onSignupClose } = useDisclosure();
+  const { isOpen: isSigninOpen, onOpen: onSigninOpen, onClose: onSigninClose } = useDisclosure();
   const { isOpen: isUploadOpen, onOpen: onUploadOpen, onClose: onUploadClose } = useDisclosure();
-
-  const loginInWithGoogle = async () => {
-    try {
-      await signInWithPopup(auth, provider);
-      updateProfile(auth.currentUser, {
-        displayName: auth.currentUser.displayName,
-      })
-    } catch (e) {
-      console.log(e.message);
-    }
-  }
 
   const logOut = async () => {
     try {
@@ -45,10 +34,9 @@ const Header = ({ user }) => {
           (
             <div className='header_signin_buttons'>
               <Button
-                _hover={{ opacity: 0.9 }}
-                colorScheme="facebook"
-                rightIcon={<BsFacebook />}
-                onClick={loginInWithGoogle}
+                variant="outline"
+                colorScheme="blue"
+                onClick={onSigninOpen}
               >
                 Sign in
               </Button>
@@ -75,7 +63,7 @@ const Header = ({ user }) => {
                 _hover={{ opacity: 0.9 }}
                 onClick={logOut}
               >
-                Logout
+                Sign out
               </Button>
             </div>
           )}
@@ -93,6 +81,23 @@ const Header = ({ user }) => {
             <ModalCloseButton />
             <ModalBody>
               <Signup onSignupClose={onSignupClose} />
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+
+        <Modal
+          isCentered
+          onClose={onSigninClose}
+          isOpen={isSigninOpen}
+          motionPreset="slideInBottom"
+          size="xl"
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Sign in</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Signin onSigninClose={onSigninClose} />
             </ModalBody>
           </ModalContent>
         </Modal>

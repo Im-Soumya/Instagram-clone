@@ -15,13 +15,13 @@
 }
 
 .header_logout_buttons {
-  width: 180px;
+  width: 190px;
   display: flex;
   justify-content: space-between;
 }
 
 .header_signin_buttons {
-  width: 205px;
+  width: 185px;
   display: flex;
   justify-content: space-between;
 }
