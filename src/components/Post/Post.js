@@ -83,13 +83,7 @@ const Post = ({ user, post, postId }) => {
         </Button>
       </div>
 
-      <Text display="flex" marginTop="10px" marginBottom="20px" marginLeft="10px">
-        <Text
-          marginRight="10px"
-          fontWeight="bold"
-        >
-          {post.username}: </Text><Text>{post.caption}</Text>
-      </Text>
+      <p className="post_caption"><strong>{post.username}: </strong>{post.caption}</p>
 
       <div className="post_comments">
         {comments?.map((comment, index) => (
