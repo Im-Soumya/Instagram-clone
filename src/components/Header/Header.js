@@ -114,7 +114,7 @@ const Header = ({ user }) => {
             <ModalHeader>What do you feel like to post?</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <ImageUpload username={auth.currentUser?.displayName} />
+              <ImageUpload onUploadClose={onUploadClose} username={auth.currentUser?.displayName} />
             </ModalBody>
           </ModalContent>
         </Modal>

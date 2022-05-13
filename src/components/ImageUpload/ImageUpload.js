@@ -5,7 +5,7 @@ import { db, storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
-const ImageUpload = ({ username }) => {
+const ImageUpload = ({ username, onUploadClose }) => {
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
   const [caption, setCaption] = useState("");
@@ -40,6 +40,8 @@ const ImageUpload = ({ username }) => {
             setProgress(0);
             setCaption("");
             setImage(null);
+
+            onUploadClose();
           })
           .catch(e => console.log(e.message));
       })
