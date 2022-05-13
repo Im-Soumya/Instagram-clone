@@ -15,7 +15,7 @@ function App() {
   const [isAppLoading, setIsAppLoading] = useState(true);
   const [isPostLoading, setIsPostLoading] = useState(true);
 
-  const loginInWithGoogle = async () => {
+  const loginInWithFacebook = async () => {
     try {
       await signInWithPopup(auth, provider);
       updateProfile(auth.currentUser, {
@@ -84,7 +84,7 @@ function App() {
             ))}
 
             {user === null &&
-              <Text marginBottom="20px" fontSize="xl" fontWeight="bold">Sorry, <Button variant="link" size="xl" onClick={loginInWithGoogle}>Login<BsFacebook style={{ marginLeft: "5px" }} /></Button> to post something.</Text>
+              <Text marginBottom="20px" fontSize="xl" fontWeight="bold">Sorry, <Button variant="link" size="xl" onClick={loginInWithFacebook}>Login<BsFacebook style={{ marginLeft: "5px" }} /></Button> to post something.</Text>
             }
 
             <Footer />
