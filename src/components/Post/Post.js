@@ -88,7 +88,7 @@ const Post = ({ user, post, postId }) => {
           marginRight="10px"
           fontWeight="bold"
         >
-          {post.username}: </Text><Text noOfLines={3}>{post.caption}</Text>
+          {post.username}: </Text><Text>{post.caption}</Text>
       </Text>
 
       <div className="post_comments">
