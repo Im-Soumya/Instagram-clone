@@ -3,7 +3,7 @@ import { Input, Button } from "@chakra-ui/react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase";
 
-const Signup = ({ onSignupClose }) => {
+const Signup = ({ onSignupClose, onSigninOpen, onSigninClose }) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +23,10 @@ const Signup = ({ onSignupClose }) => {
       setUsername("");
 
       onSignupClose();
+
+      if (onSigninOpen) {
+        onSigninClose();
+      }
     } catch (e) {
       console.log(e.message);
     }
@@ -49,7 +53,7 @@ const Signup = ({ onSignupClose }) => {
           _placeholder={{ opacity: 1, color: 'gray.500' }}
         />
         <Input
-          marginBottom="15px"
+          marginBottom="25px"
           variant="filled"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -66,8 +70,10 @@ const Signup = ({ onSignupClose }) => {
           Sign up
         </Button>
       </form>
+
+      <h3 className="signup_text">Already have an account? <span className="signup_click_link" onClick={onSigninOpen}>Sign in</span></h3>
     </div>
   )
 }
 
-export default Signup
+export default Signup;

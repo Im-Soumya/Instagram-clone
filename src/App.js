@@ -1,13 +1,13 @@
 import './App.css';
 import { useState, useEffect } from "react";
-import Post from './components/Post/Post';
-import Header from './components/Header/Header';
 import { auth, db, provider } from "./firebase";
 import { onAuthStateChanged, signInWithPopup, updateProfile } from "firebase/auth";
 import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { Text, Button, Spinner } from '@chakra-ui/react';
-import Footer from './components/Footer/Footer';
 import { BsFacebook } from "react-icons/bs";
+import Post from './components/Post/Post';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -44,9 +44,11 @@ function App() {
   }, [user]);
 
   useEffect(() => {
+    let unsub;
+
     const postsRef = collection(db, "posts");
     const orderedRef = query(postsRef, orderBy('timestamp', 'desc'));
-    onSnapshot(orderedRef, (snapShot) => {
+    unsub = onSnapshot(orderedRef, (snapShot) => {
       setPosts(snapShot.docs.map(doc => (
         {
           id: doc.id,
@@ -55,6 +57,10 @@ function App() {
       )));
       setIsPostLoading(false);
     })
+
+    return () => {
+      unsub();
+    }
   }, [])
 
 

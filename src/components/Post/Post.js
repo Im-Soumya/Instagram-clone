@@ -3,7 +3,7 @@ import { Avatar } from '@chakra-ui/react';
 import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore';
 import { db } from "../../firebase";
 import { Input, Button, Text } from "@chakra-ui/react";
-import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
+import { IoMdHeartEmpty } from "react-icons/io";
 import { RiShareForwardLine } from "react-icons/ri";
 import { FaRegBookmark } from "react-icons/fa";
 import './Post.css';

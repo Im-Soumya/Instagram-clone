@@ -5,23 +5,23 @@
   width: 100%;
   height: 60px;
   margin-bottom: 20px;
+  padding: 0 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: white;
-  padding: 20px;
   border-bottom: 1px solid lightgrey;
   object-fit: contain;
 }
 
 .header_logout_buttons {
-  width: 190px;
+  width: 172px;
   display: flex;
   justify-content: space-between;
 }
 
 .header_signin_buttons {
-  width: 185px;
+  width: 165px;
   display: flex;
   justify-content: space-between;
 }

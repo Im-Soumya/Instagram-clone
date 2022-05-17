@@ -37,6 +37,7 @@ const Header = ({ user }) => {
                 variant="outline"
                 colorScheme="blue"
                 onClick={onSigninOpen}
+                paddingX="12px"
               >
                 Sign in
               </Button>
@@ -44,6 +45,7 @@ const Header = ({ user }) => {
                 variant="outline"
                 colorScheme="teal"
                 onClick={onSignupOpen}
+                paddingX="12px"
               >
                 Sign up
               </Button>
@@ -55,6 +57,7 @@ const Header = ({ user }) => {
                 colorScheme="teal"
                 variant="outline"
                 onClick={onUploadOpen}
+                paddingX="12px"
               >
                 Upload
               </Button>
@@ -62,6 +65,7 @@ const Header = ({ user }) => {
                 colorScheme="facebook"
                 _hover={{ opacity: 0.9 }}
                 onClick={logOut}
+                paddingX="13px"
               >
                 Sign out
               </Button>
@@ -73,14 +77,23 @@ const Header = ({ user }) => {
           onClose={onSignupClose}
           isOpen={isSignupOpen}
           motionPreset="slideInBottom"
-          size="xl"
+          size="sm"
         >
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Sign Up</ModalHeader>
+            <ModalHeader className='sign_headerImg'>
+              <img
+                src='https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png'
+                alt=''
+              />
+            </ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <Signup onSignupClose={onSignupClose} />
+              <Signup
+                onSignupClose={onSignupClose}
+                onSigninOpen={onSigninOpen}
+                onSigninClose={onSigninClose}
+              />
             </ModalBody>
           </ModalContent>
         </Modal>
@@ -90,14 +103,23 @@ const Header = ({ user }) => {
           onClose={onSigninClose}
           isOpen={isSigninOpen}
           motionPreset="slideInBottom"
-          size="xl"
+          size="sm"
         >
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Sign in</ModalHeader>
+            <ModalHeader className='sign_headerImg'>
+              <img
+                src='https://www.instagram.com/static/images/web/mobile_nav_type_logo.png/735145cfe0a4.png'
+                alt=''
+              />
+            </ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              <Signin onSigninClose={onSigninClose} />
+              <Signin
+                onSigninClose={onSigninClose}
+                onSignupOpen={onSignupOpen}
+                onSignupClose={onSignupClose}
+              />
             </ModalBody>
           </ModalContent>
         </Modal>
