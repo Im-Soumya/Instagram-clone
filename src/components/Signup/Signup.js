@@ -1,3 +1,4 @@
+import "./Signup.css";
 import { useState } from 'react';
 import { Input, Button } from "@chakra-ui/react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
