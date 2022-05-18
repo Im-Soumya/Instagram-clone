@@ -40,7 +40,8 @@ const Signin = ({ onSignupOpen, onSigninClose, onSignupClose }) => {
         onSignupClose();
       }
     } catch (e) {
-      console.log(e.message);
+      let message = e.code.slice(5, 6).toUpperCase() + e.code.slice(6).replaceAll("-", " ");
+      alert(`${message}, please try signing up.`);
     }
   }
 

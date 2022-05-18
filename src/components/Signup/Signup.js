@@ -29,7 +29,8 @@ const Signup = ({ onSignupClose, onSigninOpen, onSigninClose }) => {
         onSigninClose();
       }
     } catch (e) {
-      console.log(e.message);
+      const message = e.code.slice(5, 6).toUpperCase() + e.code.slice(6).replaceAll("-", " ");
+      alert(`${message}, please try signing in.`);
     }
   }
 
